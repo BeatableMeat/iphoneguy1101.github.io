@@ -15,8 +15,8 @@ Now able to roll dice, say hello, have a conversation, ask it how it is. All bec
 			name: "Johnbot"
 		},
 		you:       {
-			name: "Grandma G",
-			bdayyear: 1960,
+			name: prompt("Enter your name or click cancel", "Bob")||"Bob",
+			bdayyear: 1967,
 			getAge:function(){
 				return new Date().getFullYear() - config.you.bdayyear;
 			}
