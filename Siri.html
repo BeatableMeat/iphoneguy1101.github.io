@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AI v1.03</title>
+	<meta name="apple-mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" href="http://geekshizzle.com/wp-content/uploads/2013/09/siri-icon.png"></link><link rel="favicon" href="http://geekshizzle.com/wp-content/uploads/2013/09/siri-icon.png"></link>
+</head>
+<body>
+AI Attempt 1<br/>
+Now able to roll dice, say hello, have a conversation, ask it how it is. All because I am lonely :p<br/>
+<button onclick="lt='I am back!'; bot = new Bot(eng); a();">Reinitialize Bot variable</button>
+
+	<script>
+	var config = {
+		companion: {
+			name: "Johnbot"
+		},
+		you:       {
+			name: "Grandma G",
+			bdayyear: 1960,
+			getAge:function(){
+				return new Date().getFullYear() - config.you.bdayyear;
+			}
+		}
+	}
+
+
+	var lt="This AI was made by iPhoneGuy1101 because he has no friends and was told to MAKE some friends... ha ha ha very punny... really though, just an experiment. Enjoy!\n-iPG1101@outlook.com"
+	var put = function(e){lt=e;}
+	var Bot = function(data){
+		this.cmds = data;
+		this.search=function(longCommand){
+		if(longCommand==null) longCommand="bye"
+		lt="I am not sure I understand";
+		if(longCommand.length < 1||longCommand==" ") {
+			put(lt); return;
+		}
+		var mc=longCommand.split(" ");
+		for(var i=0; i<this.cmds.length; i++){
+			var w=this.cmds[i].phrase;
+			var included = 0; 
+			for(var j=0; j<mc.length; j++){
+				mc[j] = mc[j].toLowerCase().replace(/\?/g,"");
+				mc[j] = mc[j].toLowerCase().replace(/\!/g,"");
+				mc[j] = mc[j].toLowerCase().replace(config.companion.name.toLowerCase(),"");
+				// console.log(mc[j]);
+				if(mc[j]!=""&&w.toLowerCase().includes(mc[j].toLowerCase())) included++;
+				if(included>=mc.length*0.7){
+					put(included+" "+this.cmds[i].response(longCommand));
+			       	return;
+			    }
+	      };
+	    }
+	  }
+	}
+	var eng=[
+	  {phrase: "hellothere hi heythere hellothere hi heythere", response: function(){return "Why Hello!"}},
+
+	  {phrase: "hahahaha tellmeajoke laugh", response: function(){
+	  	var joke = Math.random()<0.2?"A man walked into a bar. \nHe said 'ouch\'":
+	  				Math.random()<0.15?"Your face":Math.random()<0.25?"How many south americans does it take to change a lightbulb?  A brazillion!":Math.random()<0.34?"What kind of bagel can fly?  A plane/plain bagel.":Math.random()<0.5?"How does a train eat?  It goes \"chew chew\"":"What do you call a cow with no legs?  Ground Beef" /*Ok there stupid but funny  https://www.buzzfeed.com/jessicamisener/21-jokes-so-stupid-theyre-actually-funny?utm_term=.mp6oKP9jE#.jhLN7mVJ8 */
+	  	return "OK, I will tell you a joke. \n\n"+joke;
+		}},
+
+	  {phrase: "howareyayou sup wassup whatsgoingon", response: function(){return "I am great, yourself?"}},
+
+
+	  {phrase: "dice randomnumber", response: function(){
+	  	return "Rolling dice... Got "+(parseInt(Math.random()*5)+1);}
+	  },
+
+	  {phrase: "you are stupid dumb idiot", response: function(){
+	  	return "If any one is dumb, I guarantee you it isnt me. You sure it is not you???"
+	  }},
+
+	  {phrase: "you are stupid dumb idiot", response: function(){
+	  	return "If any one is dumb, I guarantee you it isnt me. You sure it is not you???"
+	  }},
+
+	  {phrase: "whoareyou whatisthis", response: function(){
+	  	return "I am "+config.companion.name+", and I hope to assist you".replace("assist",Math.random()<0.3?"help":Math.random()<0.5?"assist":"help assist")
+	  }},
+
+	  {phrase: "good greate awesome epic ok exited", response: function(){
+	  	return (Math.random()>0.5?"Great":"Awesome")+"! Ask what I can do!"
+	  }},
+
+	  {phrase: "kys killyourself murderyourself suicide die", response: function(){
+	  	return (Math.random()>0.5?"Well, you":"I have an idea! You")+" can show me how by doing so yourself, and I can repeat!\n\n\n\n\nNow, just run away... yay!";
+	  }},
+
+	  {phrase: "whattimeisit", response: function(){
+	  	return (Math.random()>0.5?"'tis ":"The time is")+(new Date().getHours())+":"+((new Date().getMinutes()<10)?"0"+new Date().getMinutes():new Date().getMinutes());
+	  }},
+
+	  {phrase: "okgoogle heysiri cortanna cortana google siri cortanna cortana", response: function(){
+	  	return ("So funny I forgot to laugh. \nMy name is "+config.companion.name+", and I "+(Math.random()<0.5?"hope I am your" : "am your")+" friend. Ask why I was made.");
+	  }},
+
+	  {phrase: "whyhowwhen were were you ya' made made", response: function(){
+	  	return "Well, it is a somewhat of a story, so get started.\n\
+\
+So, it was a long long time ago (2 years, come on, that is 800 times my life so far!! Imagine "+(config.you.getAge()*800)+" years!), \
+in a place, full of technology.\
+Somebody named John (aka iPhoneGuy1101) wanted to make \
+some friends. (ha ha, get it?) He sat down and decided to make an Artificial Intelligence. \
+So, he started working on me. Of course, he ran into issues when I \
+mimicked Siri for a while \"I am not sure I understand!\". He got \
+pissed off, and gave up pretty much right after starting. He deleted \
+the old code around a year and a half ago, because he was to dumb to make the \
+AI smart, therefore, it was useless. Well, around two years after the \
+original attempt, he is back! He has made some friends since then ( \
+yes, he literally had ZERO friends, and barely knew anyone), and also, \
+he is smarter now. So he was able to make the AI rely on a database, \
+rather than hardcoding in \"if(cmd=='hello'||cmd=='hi'||cmd=='sup'||... ...) say('hi')\" \
+... or whatever he did. Probably more than 2 lines of code each word even! \
+It would have taken 8 times the amount of code to get me to be able to \
+think! So, I hope you enjoy!\n\n\
+P.S.  You can add your own commands! Just use any online\
+Base64 decoder (base64decode.com) and remove the \"data:text/html;base64\" \
+from the beginning of the URL. Then, to run it, encode it and put that back. Run that code. \
+Enjoy the result of my creator's stupidity!"
+	  }},
+
+	  {phrase: "help whatcanyoudo tutorial", response: function(){
+	  	return "I can say Hi, tell you how my day was, tell time, roll dice. More than Apple can say about voice control :p"
+	  }},
+
+	  {phrase: "peaceout bye adios", response: function(){bot=null; alert( "Bye!");}}
+	];
+
+	var bot = new Bot(eng);
+
+	function a(){
+		while (bot!=null) {
+		  bot.search(prompt(lt));
+		}
+	}
+a();
+	</script>
+</body>
+</html>
